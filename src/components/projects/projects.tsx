@@ -42,10 +42,12 @@ function ProjectImage({
   src,
   alt,
   className = '',
+  priority = false,
 }: {
   src: string;
   alt: string;
   className?: string;
+  priority?: boolean;
 }) {
   return (
     <div className={`relative overflow-hidden bg-[#1a1208] ${className}`}>
@@ -71,6 +73,8 @@ function ProjectImage({
         fill
         sizes='(max-width: 768px) 100vw, 50vw'
         className='object-cover mix-blend-luminosity opacity-60'
+        loading={priority ? 'eager' : 'lazy'}
+        priority={priority}
         onError={() => {}}
       />
     </div>
@@ -89,7 +93,7 @@ export default function Projects() {
     <section
       ref={ref}
       className='relative flex flex-col overflow-hidden py-20 px-6'
-      style={{ background: 'var(--bg-main)' }}
+      style={{ background: 'var(--bg-main)', position: 'relative' }}
     >
       {/* bg glow */}
       <motion.div
@@ -100,7 +104,10 @@ export default function Projects() {
             'radial-gradient(ellipse 60% 40% at 80% 20%, rgba(201,106,58,0.07) 0%, transparent 70%)',
         }}
       />
-      <RandomFloatingCubes count={3} seed={2} />
+      <RandomFloatingCubes
+        count={3}
+        seed={2}
+      />
 
       <div className='relative z-10 w-full max-w-5xl mx-auto flex flex-col gap-16'>
         {/* ── EDITORIAL HEADER ── */}
@@ -126,9 +133,13 @@ export default function Projects() {
               className='text-3xl md:text-4xl font-black leading-none tracking-tight mb-4'
               style={{ color: 'var(--text-primary)' }}
             >
-              ENGINEERED
-              <br />
-              <span style={{ color: 'var(--accent)' }}>FOR IMPACT.</span>
+              PROJECT
+              <span
+                className='ml-2'
+                style={{ color: 'var(--accent)' }}
+              >
+                SECTION
+              </span>
             </h2>
             <p
               className='text-sm leading-relaxed max-w-xs'
@@ -140,7 +151,6 @@ export default function Projects() {
           </div>
 
           {/* Avatar */}
-        
         </motion.div>
 
         <motion.div
@@ -163,6 +173,7 @@ export default function Projects() {
             src={featured.image}
             alt={featured.title}
             className='min-h-[280px] md:min-h-full'
+            priority
           />
 
           {/* Right: content */}
@@ -313,7 +324,7 @@ export default function Projects() {
           >
             <div>
               <h2
-                className='text-2xl md:text-3xl font-black tracking-tight'
+                className='text-xl md:text-2xl font-black tracking-tight'
                 style={{ color: 'var(--text-primary)' }}
               >
                 LATEST INSIGHTS

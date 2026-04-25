@@ -44,7 +44,7 @@ export default function SocialSidebar() {
           target='_blank'
           className='transition-colors duration-200'
           style={{ color: 'var(--text-muted)' }}
-          whileHover={{ scale: 1.2, color: 'var(--accent)' }}
+          whileHover={{ scale: 1.2, color: 'var(--accent-brand)' }}
         >
           {svg}
         </motion.a>

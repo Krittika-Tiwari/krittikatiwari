@@ -1,10 +1,8 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
-import FloatingCube from '@/components/hero/floating-shape';
 import { RandomFloatingCubes } from '@/components/hero/floating-shape';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
 const experiences = [
   {
@@ -113,7 +111,7 @@ export default function SkillsExperience() {
     <section
       ref={ref}
       className='relative flex flex-col items-center overflow-hidden py-20 px-6'
-      style={{ background: 'var(--bg-main)' }}
+      style={{ background: 'var(--bg-main)', position: 'relative' }}
     >
       {/* bg glow */}
       <motion.div
@@ -154,7 +152,7 @@ export default function SkillsExperience() {
           >
             Skilled in React, Next.js, Node.js, and modern databases.
             Experienced in designing efficient APIs, optimizing performance,
-            and building real-time systems.
+            and building real-time systems with AI integrations.
           </p>
         </div>
 
@@ -164,141 +162,84 @@ export default function SkillsExperience() {
 
       {/* ── BENTO GRID ── */}
       <div className='w-full max-w-5xl z-10 mb-20'>
-        {/* Row 1: Frontend Core (wider) + Immersive Tech */}
+        {/* Row 1: Frontend Frameworks + Languages */}
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
-          <BentoCard
-            delay={0}
-            icon='▦'
-            title='Frontend Core'
-            className='min-h-[160px]'
-          >
+          <BentoCard delay={0} icon='▦' title='Frontend Frameworks & Libraries' className='min-h-[160px]'>
             <div className='flex flex-wrap gap-2'>
-              {[
-                'React.js',
-                'Next.js',
-                'TypeScript',
-                'Tailwind CSS',
-                'HTML5',
-                'CSS3/SCSS',
-              ].map((t) => (
-                <Tag
-                  key={t}
-                  label={t}
-                />
+              {['React', 'Next.js', 'Tailwind CSS', 'shadcn/ui', 'Zustand', 'TanStack Query'].map((t) => (
+                <Tag key={t} label={t} />
               ))}
             </div>
           </BentoCard>
 
-          <BentoCard
-            delay={0.08}
-            icon='◈'
-            title='Immersive Tech'
-            className='min-h-[160px]'
-          >
+          <BentoCard delay={0.08} icon='◈' title='Languages' className='min-h-[160px]'>
             <div className='flex flex-wrap gap-2'>
-              {['Three.js', 'WebGL', 'Blender', 'Framer Motion', 'GSAP'].map(
-                (t) => (
-                  <Tag
-                    key={t}
-                    label={t}
-                  />
-                ),
-              )}
+              {['JavaScript', 'TypeScript', 'Python', 'C++', 'SQL', 'HTML', 'CSS', 'Java'].map((t) => (
+                <Tag key={t} label={t} />
+              ))}
             </div>
           </BentoCard>
         </div>
 
-        {/* Row 2: Backend (small) + Workflow (small) + UI Architecture (wide) */}
-        <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
-          <BentoCard
-            delay={0.14}
-            icon='⬡'
-            title='Backend'
-            className='min-h-[180px]'
-          >
-            <ul className='flex flex-col gap-2'>
-              {['Node.js', 'GraphQL', 'PostgreSQL', 'Prisma'].map((t) => (
-                <li
-                  key={t}
-                  className='text-sm'
-                  style={{ color: 'var(--text-muted)' }}
-                >
-                  {t}
-                </li>
+        {/* Row 2: Backend + Databases + APIs & AI */}
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mb-4'>
+          <BentoCard delay={0.14} icon='⬡' title='Backend Frameworks' className='min-h-[180px]'>
+            <div className='flex flex-wrap gap-2'>
+              {['Node.js', 'Nest.js', 'Express.js', 'FastAPI', 'Spring Boot', 'Drizzle ORM'].map((t) => (
+                <Tag key={t} label={t} />
               ))}
-            </ul>
+            </div>
           </BentoCard>
 
-          <BentoCard
-            delay={0.2}
-            icon='⚒'
-            title='Workflow'
-            className='min-h-[180px]'
-          >
-            <ul className='flex flex-col gap-2'>
-              {['Git / GitHub', 'Docker', 'AWS / Vercel', 'CI/CD'].map((t) => (
-                <li
-                  key={t}
-                  className='text-sm'
-                  style={{ color: 'var(--text-muted)' }}
-                >
-                  {t}
-                </li>
+          <BentoCard delay={0.2} icon='🗄' title='Databases' className='min-h-[180px]'>
+            <div className='flex flex-wrap gap-2'>
+              {['MongoDB', 'PostgreSQL', 'MySQL', 'Redis'].map((t) => (
+                <Tag key={t} label={t} />
               ))}
-            </ul>
+            </div>
           </BentoCard>
 
-          {/* UI Architecture — no icon, special layout */}
-          <motion.div
-            className='rounded-2xl p-5 flex flex-col justify-between min-h-[180px] relative overflow-hidden'
+          <BentoCard delay={0.26} icon='✦' title='APIs & AI Tools' className='min-h-[180px]'>
+            <div className='flex flex-wrap gap-2'>
+              {['REST API', 'WebSockets', 'ChatGPT API', 'Gemini API', 'Hugging Face', 'RAG Workflows'].map((t) => (
+                <Tag key={t} label={t} />
+              ))}
+            </div>
+          </BentoCard>
+        </div>
+
+        {/* Row 3: DevOps & Tools — full width accent card */}
+        <motion.div
+          className='rounded-2xl p-5 flex flex-col gap-4 relative overflow-hidden'
+          style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.32, duration: 0.5 }}
+          whileHover={{ borderColor: 'var(--accent-brand)', boxShadow: '0 8px 32px var(--accent-10)' }}
+        >
+          <div
+            className='absolute bottom-0 right-0 w-40 h-40 opacity-[0.06]'
             style={{
-              background: 'var(--bg-card)',
-              border: '1px solid var(--border)',
+              backgroundImage:
+                'repeating-linear-gradient(0deg,var(--accent-brand) 0,var(--accent-brand) 1px,transparent 1px,transparent 18px),repeating-linear-gradient(90deg,var(--accent-brand) 0,var(--accent-brand) 1px,transparent 1px,transparent 18px)',
             }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.26, duration: 0.5 }}
-            whileHover={{
-              borderColor: 'var(--accent)',
-              boxShadow: '0 8px 32px rgba(201,106,58,0.1)',
-            }}
-          >
-            {/* decorative grid texture bottom-right */}
-            <div
-              className='absolute bottom-0 right-0 w-28 h-28 opacity-[0.08]'
-              style={{
-                backgroundImage:
-                  'repeating-linear-gradient(0deg,var(--accent) 0,var(--accent) 1px,transparent 1px,transparent 18px),repeating-linear-gradient(90deg,var(--accent) 0,var(--accent) 1px,transparent 1px,transparent 18px)',
-              }}
-            />
-            <div>
-              <h3
-                className='font-bold text-base mb-2'
-                style={{ color: 'var(--text-primary)' }}
-              >
-                UI Architecture
-              </h3>
-              <p
-                className='text-sm leading-relaxed'
-                style={{ color: 'var(--text-muted)' }}
-              >
-                Designing high-fidelity systems in Figma with engineering
-                precision.
-              </p>
-            </div>
-            <div className='flex gap-2 flex-wrap'>
-              <Tag
-                label='✦ Figma'
-                accent
-              />
-              <Tag
-                label='✦ Adobe CC'
-                accent
-              />
-            </div>
-          </motion.div>
-        </div>
+          />
+          <div className='flex items-center gap-3'>
+            <span
+              className='w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0'
+              style={{ background: 'var(--accent-soft)', color: 'var(--accent-brand)' }}
+            >
+              ⚒
+            </span>
+            <h3 className='font-bold text-base' style={{ color: 'var(--text-primary)' }}>DevOps & Tools</h3>
+          </div>
+          <div className='flex flex-wrap gap-2'>
+            {['Git', 'GitHub', 'Docker', 'AWS', 'CI/CD', 'Vercel', 'Convex', 'Clerk', 'Liveblocks'].map((t) => (
+              <Tag key={t} label={t} accent />
+            ))}
+          </div>
+        </motion.div>
       </div>
 
       {/* ── TIMELINE HEADING ── */}
@@ -437,7 +378,7 @@ export default function SkillsExperience() {
         />
         <div className='z-10'>
           <h3
-            className='text-2xl md:text-3xl font-black mb-2'
+            className='text-2xl md:text-2xl font-black mb-2'
             style={{ color: 'var(--text-primary)' }}
           >
             Ready for the next{' '}

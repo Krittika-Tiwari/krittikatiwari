@@ -5,11 +5,22 @@ import Contact from '@/components/contact/contact';
 
 export default function Home() {
   return (
-    <main style={{ background: 'var(--bg-main)', color: 'var(--text-primary)' }}>
-      <section id='home'><Hero /></section>
-      <section id='tech'><TechStack /></section>
-      <section id='projects'><Projects /></section>
-      <section id='contact'><Contact /></section>
+    <main
+      style={{ background: 'var(--bg-main)', color: 'var(--text-primary)' }}
+    >
+      <section id='home'>
+        <Hero />
+      </section>
+      <section id='projects'>
+        <Projects />
+      </section>
+      <section id='tech'>
+        <TechStack />
+      </section>
+
+      <section id='contact'>
+        <Contact />
+      </section>
     </main>
   );
 }

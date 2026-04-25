@@ -15,12 +15,12 @@ export default function Hero() {
           'radial-gradient(ellipse at 60% 40%, var(--bg-subtle) 0%, var(--bg-main) 100%)',
       }}
     >
-      {/* Outer floating shapes (outside the card) */}
+
       <FloatingCube className='-top-4 right-12' size='lg' delay={0.2} />
       <FloatingCube className='bottom-4 left-8' size='md' delay={1} />
       <FloatingCube className='bottom-16 left-24 hidden sm:block' size='sm' delay={0.7} />
 
-      {/* ── Main card container ── */}
+
       <motion.div
         className='relative w-full max-w-6xl'
         style={{ minHeight: 'clamp(500px, 85vh, 680px)' }}
@@ -45,7 +45,7 @@ export default function Hero() {
             />
 
             {/* ── NAVBAR ── */}
-            <div className='absolute top-6 left-8 right-8 z-20'>
+            <div className='absolute top-6 left-8 right-8 z-20 hidden md:block'>
               <Navbar />
             </div>
 
@@ -119,24 +119,48 @@ export default function Hero() {
 
 
 
-                <motion.button
-                  className='text-white px-7 py-3 rounded-xl text-sm font-semibold tracking-wide transition-all duration-200'
-                  style={{
-                    background: 'var(--accent)',
-                    boxShadow: '0 4px 24px var(--accent-glow)',
-                  }}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.75 }}
-                  whileHover={{
-                    scale: 1.04,
-                    boxShadow: '0 6px 32px var(--accent-glow)',
-                    background: 'var(--accent-hover)',
-                  }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  Learn More
-                </motion.button>
+                <div className='flex flex-wrap gap-3 justify-center md:justify-start'>
+                  <motion.a
+                    href='#projects'
+                    className='text-white px-7 py-3 rounded-xl text-sm font-semibold tracking-wide transition-all duration-200'
+                    style={{
+                      background: 'var(--accent)',
+                      boxShadow: '0 4px 24px var(--accent-glow)',
+                    }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.75 }}
+                    whileHover={{
+                      scale: 1.04,
+                      boxShadow: '0 6px 32px var(--accent-glow)',
+                      background: 'var(--accent-hover)',
+                    }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    View Work
+                  </motion.a>
+                  <motion.a
+                    href='/Krittika_Tiwari.pdf'
+                    download
+                    className='px-7 py-3 rounded-xl text-sm font-semibold tracking-wide border transition-all duration-200'
+                    style={{
+                      color: 'var(--text-primary)',
+                      borderColor: 'var(--border-brand)',
+                      background: 'transparent',
+                    }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.85 }}
+                    whileHover={{
+                      scale: 1.04,
+                      borderColor: 'var(--accent-brand)',
+                      color: 'var(--accent-brand)',
+                    }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    Resume ↓
+                  </motion.a>
+                </div>
               </div>
 
               <div className='flex justify-center items-center relative h-full'>

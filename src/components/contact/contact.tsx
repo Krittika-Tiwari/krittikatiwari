@@ -1,10 +1,10 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { RandomFloatingCubes } from '@/components/hero/floating-shape';
+import emailjs from 'emailjs-com';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
-import FloatingCube from '@/components/hero/floating-shape';
-import { RandomFloatingCubes } from '@/components/hero/floating-shape';
+import { useRef, useState } from 'react';
 
 export default function Contact() {
   const ref = useRef<HTMLElement>(null);
@@ -13,18 +13,34 @@ export default function Contact() {
     offset: ['start end', 'end start'],
   });
   const bgY = useTransform(scrollYProgress, [0, 1], ['-60px', '60px']);
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSent(true);
+    setStatus('sending');
+    const form = e.target as HTMLFormElement;
+    try {
+      await emailjs.sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        form,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+      );
+      setStatus('sent');
+      form.reset();
+    } catch (error) {
+      console.error('Email failed:', error);
+      setStatus('error');
+    }
   }
+
+  const sent = status === 'sent';
 
   return (
     <section
       ref={ref}
       className='relative min-h-screen flex flex-col overflow-hidden py-24 px-6'
-      style={{ background: 'var(--bg-main)' }}
+      style={{ background: 'var(--bg-main)', position: 'relative' }}
     >
       {/* bg glow bottom-center */}
       <motion.div
@@ -187,6 +203,7 @@ export default function Contact() {
                 <div className='relative'>
                   <select
                     id='mission'
+                    name='mission'
                     required
                     className='w-full px-0 py-3 text-sm appearance-none outline-none bg-transparent cursor-pointer'
                     style={{
@@ -226,6 +243,7 @@ export default function Contact() {
                 </label>
                 <textarea
                   id='message'
+                  name='message'
                   rows={5}
                   placeholder='Describe the future we are building...'
                   required
@@ -358,7 +376,14 @@ export default function Contact() {
           future.
         </p>
         <div className='flex gap-6'>
-          {[{ l: 'LinkedIn', href: 'https://www.linkedin.com/in/krittikatiwari/' }, { l: 'GitHub', href: 'https://github.com/Krittika-Tiwari' }, { l: 'Email', href: 'mailto:krittikatiwari122004@gmail.com' }].map(({ l, href }) => (
+          {[
+            {
+              l: 'LinkedIn',
+              href: 'https://www.linkedin.com/in/krittikatiwari/',
+            },
+            { l: 'GitHub', href: 'https://github.com/Krittika-Tiwari' },
+            { l: 'Email', href: 'mailto:krittikatiwari122004@gmail.com' },
+          ].map(({ l, href }) => (
             <a
               key={l}
               href={href}
@@ -447,6 +472,7 @@ function UnderlineField({
       </label>
       <input
         id={id}
+        name={id}
         type={type}
         placeholder={placeholder}
         required

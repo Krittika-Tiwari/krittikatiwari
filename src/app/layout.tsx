@@ -9,8 +9,23 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  title: "Krittika Tiwari",
-  description: "Portfolio",
+  title: 'Krittika Tiwari | Software Developer',
+  description:
+    'Portfolio of Krittika Tiwari — Software Developer skilled in React, Next.js, Node.js and AI/ML. Building scalable apps and efficient APIs.',
+  keywords: ['Software Developer', 'React', 'Next.js', 'Node.js', 'Portfolio', 'Krittika Tiwari'],
+  authors: [{ name: 'Krittika Tiwari' }],
+  openGraph: {
+    title: 'Krittika Tiwari | Software Developer',
+    description: 'Software Developer skilled in React, Next.js & Node.js — building scalable apps, efficient APIs, and exploring AI/ML.',
+    url: 'https://krittikatiwari.vercel.app',
+    siteName: 'Krittika Tiwari',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Krittika Tiwari | Software Developer',
+    description: 'Software Developer skilled in React, Next.js & Node.js.',
+  },
 };
 
 export default function RootLayout({
